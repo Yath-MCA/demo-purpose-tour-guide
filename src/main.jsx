@@ -3,8 +3,18 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 
 import $ from 'jquery'
+import Tooltip from 'bootstrap/js/dist/tooltip';
+import Popover from 'bootstrap/js/dist/popover';
+
 window.$ = $
 window.jQuery = $
+
+$.fn.tooltip = Tooltip.jQueryInterface;
+$.fn.popover = Popover.jQueryInterface;
+
+$.isFunction = function(obj) {
+  return typeof obj === "function";
+};
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './styles.css'
