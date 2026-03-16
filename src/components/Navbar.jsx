@@ -1,30 +1,26 @@
-import React from 'react'
-import ProfileDropdown from './ProfileDropdown.jsx'
+import React from 'react';
+import ProfileDropdown from './ProfileDropdown';
 
-function Navbar({ dropdownOpen, setDropdownOpen }) {
+const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <span className="logo-bracket">[</span>
-        <span className="logo-text">UI_TEST</span>
-        <span className="logo-bracket">]</span>
-      </div>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+      <a className="navbar-brand fw-bold" href="#!">TEST-SPA</a>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span className="navbar-toggler-icon"></span>
+      </button>
 
-      <div className="navbar-center">
-        <button className="nav-link active" data-testid="dashboardBtn">
-          <span className="nav-indicator">▶</span>
-          DASHBOARD
-        </button>
-      </div>
-
-      <div className="navbar-right">
-        <ProfileDropdown
-          dropdownOpen={dropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
+      <div className="collapse navbar-collapse" id="navbarContent">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <button className="nav-link btn btn-link" id="dashboardBtn">Dashboard</button>
+          </li>
+        </ul>
+        <div className="d-flex">
+          <ProfileDropdown />
+        </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

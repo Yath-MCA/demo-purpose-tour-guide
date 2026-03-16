@@ -1,87 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-function ActionButtons({ setPanelOpen, messageVisible, setMessageVisible }) {
-  function handleNormalAction() {
-    console.log('[TEST] Normal action button clicked — id: normalActionBtn')
-    alert('Normal Action triggered — button click confirmed.')
-  }
+const ActionButtons = ({ togglePanel }) => {
+  const [showMessage, setShowMessage] = useState(false);
 
   return (
-    <section className="action-section">
-      <div className="section-label">
-        <span className="label-line" />
-        <span className="label-text">ACTION BUTTONS</span>
-        <span className="label-line" />
+    <div className="card p-4 shadow-sm mb-4">
+      <div className="d-flex flex-wrap gap-2 mb-3">
+        <button className="btn btn-primary" id="normalActionBtn" onClick={() => console.log('Normal action clicked')}>
+          Normal Action 
+        </button>
+        <button className="btn btn-success" id="openPanelBtn" onClick={togglePanel}>
+          Open Slide Panel
+        </button>
+        <button className="btn btn-info text-white" id="toggleMessageBtn" onClick={() => setShowMessage(!showMessage)}>
+          Toggle Message
+        </button>
       </div>
 
-      <div className="action-grid">
-        {/* Normal Action Button */}
-        <div className="action-card">
-          <div className="action-card-meta">
-            <span className="action-id">#normalActionBtn</span>
-            <span className="action-type">CLICK</span>
-          </div>
-          <button
-            id="normalActionBtn"
-            className="action-btn primary"
-            onClick={handleNormalAction}
-          >
-            <span className="btn-icon">◉</span>
-            Normal Action
-          </button>
-          <p className="action-desc">Triggers alert + console log on click.</p>
+      {showMessage && (
+        <div className="alert alert-info mt-3" id="messageBox">
+          Toggled message visibility!
         </div>
+      )}
+    </div>
+  );
+};
 
-        {/* Open Panel Button */}
-        <div className="action-card">
-          <div className="action-card-meta">
-            <span className="action-id">#openPanelBtn</span>
-            <span className="action-type">PANEL</span>
-          </div>
-          <button
-            id="openPanelBtn"
-            className="action-btn secondary"
-            onClick={() => setPanelOpen(true)}
-          >
-            <span className="btn-icon">⊞</span>
-            Open Panel
-          </button>
-          <p className="action-desc">Slides in the right-side panel.</p>
-        </div>
-
-        {/* Toggle Message Button */}
-        <div className="action-card">
-          <div className="action-card-meta">
-            <span className="action-id">#toggleMessageBtn</span>
-            <span className="action-type">TOGGLE</span>
-          </div>
-          <button
-            id="toggleMessageBtn"
-            className={`action-btn toggle ${messageVisible ? 'active' : ''}`}
-            onClick={() => setMessageVisible(prev => !prev)}
-          >
-            <span className="btn-icon">{messageVisible ? '◀' : '▶'}</span>
-            {messageVisible ? 'Hide Message' : 'Show Message'}
-          </button>
-          <p className="action-desc">Toggles a message block visibility.</p>
-        </div>
-      </div>
-
-      {/* Toggleable message */}
-      <div
-        id="toggleMessage"
-        className={`toggle-message ${messageVisible ? 'visible' : 'hidden'}`}
-        role="status"
-        aria-live="polite"
-      >
-        <span className="toggle-message-icon">✔</span>
-        <div>
-          <strong>Message Visible</strong>
-          <p>This element is toggled by <code>#toggleMessageBtn</code>. Automation can assert visibility here.</p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export default ActionButtons
+export default ActionButtons;
